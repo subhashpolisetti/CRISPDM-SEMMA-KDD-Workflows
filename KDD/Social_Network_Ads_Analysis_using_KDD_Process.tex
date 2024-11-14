@@ -1,0 +1,163 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\title{Analyzing Social Network Ad Effectiveness Using the KDD Methodology and Machine Learning}
+\author{Subhash Polisetti}
+\date{November 05, 2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+As digital advertising continues to shape user engagement on social networks, targeted advertising is crucial for maximizing ad effectiveness. This paper applies the Knowledge Discovery in Databases (KDD) methodology to analyze the patterns in social network ad data. Using features like age and estimated salary, we build a predictive model based on the Decision Tree classifier, achieving an accuracy of \textbf{88.75\%}. Our findings highlight that age and income significantly influence purchasing decisions, providing insights into enhancing ad targeting strategies. We discuss our methodology, feature selection, model evaluation, and insights derived from the analysis, contributing valuable perspectives to social network advertising optimization.
+
+\end{abstract}
+
+\section{Introduction}
+With the rapid growth of social media platforms, advertisers are leveraging user demographic data to tailor content. Traditional methods, including demographic-based targeting, often fail to account for nuanced relationships in data. This research uses the KDD (Knowledge Discovery in Databases) methodology to explore patterns in social network ad data and predict user purchasing behavior. Our approach combines feature engineering and machine learning to identify effective predictors, ultimately aiming to enhance the precision of ad targeting.
+
+\subsection{Research Objectives}
+This study aims to:
+\begin{itemize}
+    \item Investigate user demographic factors affecting ad responsiveness on social networks.
+    \item Apply machine learning techniques to predict user purchasing behavior based on demographic features.
+    \item Propose insights for improving content-based advertising in social networks.
+\end{itemize}
+
+\section{KDD Methodology}
+The KDD methodology guides the knowledge discovery process, consisting of iterative steps to transform raw data into valuable insights. Each phase, from sampling to model assessment, provides a systematic approach to refine the predictive model.
+
+\subsection{Sample}
+Data was sourced from a social network ads dataset containing demographic details such as age, estimated salary, and purchase behavior. Table \ref{tab:features} describes the core features considered in this study.
+
+\begin{table}[H]
+\centering
+\caption{Social Network Ads Dataset Features}
+\label{tab:features}
+\begin{tabular}{ll}
+\toprule
+\textbf{Feature} & \textbf{Description} \\
+\midrule
+Age & User's age in years. \\
+Estimated Salary & User's estimated annual salary in USD. \\
+Purchased & Binary indicator of purchase (1 = purchase, 0 = no purchase). \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Explore}
+The exploration phase involved statistical analysis and visualization of features. Figure \ref{fig:age_vs_purchase} and Figure \ref{fig:salary_vs_purchase} show the relationship between age, estimated salary, and purchasing behavior.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{agebypurchase.png}
+    \caption{Distribution of Age by Purchase Status}
+    \label{fig:age_vs_purchase}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{agehist.png}
+    \caption{Distribution of Estimated Salary by Purchase Status}
+    \label{fig:salary_vs_purchase}
+\end{figure}
+
+The exploratory analysis indicates that middle-aged individuals are more likely to purchase. Similarly, individuals with higher estimated salaries tend to make more purchases, suggesting the influence of income on ad effectiveness.
+
+\subsection{Modify}
+\subsubsection{Data Preprocessing}
+Data preprocessing included encoding categorical features and scaling numeric data to improve model performance. \texttt{StandardScaler} was applied to standardize the features, ensuring uniformity across variables.
+
+\subsection{Feature Engineering}
+New features, such as interaction terms between age and estimated salary, were created to capture nuanced behavior patterns. The combination of these features allowed the model to account for complex relationships that impact user purchasing decisions.
+
+\section{Modeling}
+The study evaluated multiple algorithms, selecting the Decision Tree Classifier for its interpretability and high accuracy. The model achieved an accuracy of 88.75\%, making it a robust choice for this dataset.
+
+\subsection{Hyperparameter Tuning}
+Hyperparameters were optimized using GridSearchCV to maximize accuracy. The final parameters used in the model included:
+\begin{itemize}
+    \item Maximum Depth: 10
+    \item Minimum Samples Split: 4
+\end{itemize}
+
+\subsection{Feature Importance}
+The model identified `EstimatedSalary` as the most influential feature, followed by `Age`. Figure \ref{fig:feature_importance} shows the importance of each feature in predicting purchase likelihood.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{feature importance.png}
+    \caption{Feature Importance in Predicting Purchase Likelihood}
+    \label{fig:feature_importance}
+\end{figure}
+
+\section{Evaluation}
+The model's performance was evaluated using accuracy, precision, recall, and ROC-AUC scores. The accuracy of 88.75\%, along with high precision and recall values, indicates strong model performance in distinguishing likely purchasers.
+
+\subsection{Confusion Matrix}
+Figure \ref{fig:confusion_matrix} presents the confusion matrix, which illustrates the model's performance in terms of true positives, false positives, true negatives, and false negatives.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{confusion matrix.png}
+    \caption{Confusion Matrix for Purchase Prediction Model}
+    \label{fig:confusion_matrix}
+\end{figure}
+
+\subsection{ROC Curve}
+The ROC curve, as shown in Figure \ref{fig:roc_curve}, demonstrates the model's ability to distinguish between positive and negative classes with an AUC of 0.92, indicating excellent discriminatory power.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{roc.png}
+    \caption{ROC Curve for Purchase Prediction Model}
+    \label{fig:roc_curve}
+\end{figure}
+
+\section{Discussion and Results}
+The findings reveal that age and income are significant factors in determining ad effectiveness on social networks. Higher purchasing tendencies among middle-aged and high-income users support the value of targeted advertising based on demographic data. This study suggests that content-based ad targeting can enhance user engagement by aligning ads with user profiles.
+
+\subsection{Limitations}
+The study's limitations include:
+\begin{itemize}
+    \item \textbf{Dataset Scope}: The data covers limited demographic features, potentially reducing generalizability.
+    \item \textbf{Temporal Aspects}: Time-based factors, such as seasonal purchase trends, were not considered.
+    \item \textbf{Additional Contextual Data}: Factors like user interactions, interests, or browsing history were not included.
+\end{itemize}
+
+\section{Conclusion}
+This research highlights the potential of demographic-based machine learning models in predicting ad effectiveness. By applying the KDD methodology, the study achieved a high-performing model, validating the feasibility of content-based ad recommendations on social networks. These insights can guide advertisers in optimizing campaign strategies by targeting user segments more effectively.
+
+\section{Future Work}
+Future research could focus on:
+\begin{itemize}
+    \item \textbf{Incorporating Social and Contextual Data}: Leveraging additional user data, such as interests and interactions, to improve targeting precision.
+    \item \textbf{Exploring Deep Learning Models}: Investigating deep learning architectures for more sophisticated feature interactions.
+    \item \textbf{Analyzing Temporal Trends}: Incorporating time-series analysis to understand changing user preferences over time.
+\end{itemize}
+
+\begin{thebibliography}{9}
+\bibitem{content_based}
+Lops, P., Gemmis, M. D., \& Semeraro, G., ``Content-based Recommender Systems: State of the Art and Trends,'' \textit{Springer}, 2011.
+
+\bibitem{decision_tree}
+Breiman, L., ``Random Forests,'' \textit{Machine Learning}, vol. 45, pp. 5-32, 2001.
+
+\bibitem{kdd_process}
+``What is the KDD Process?'', SAS Insights. Available: \url{https://www.sas.com/en_us/insights/analytics/kdd-process.html}. [Accessed: 05-Nov-2024].
+
+\bibitem{ad_effectiveness}
+Chen, T., \& Guestrin, C., ``XGBoost: A Scalable Tree Boosting System,'' \textit{Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining}, 2016.
+
+\end{thebibliography}
+
+\end{document}
